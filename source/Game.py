@@ -1,8 +1,8 @@
 import pygame
-from source.config import screen,  scores_num
+from source.config import screen, scores_num, score_pos
 from source.Snake import Snake
 from source.Creating import obstacle_generator, egg_pic, egg_boost, \
-rabbit_boost, rabbit_pic, wall_pic, snake_skin
+rabbit_boost, rabbit_pic, wall_pic, snake_skin, background
 from source.Level import Level
 
     
@@ -15,15 +15,12 @@ class Game:
         return pygame.font.Font(None, 32).render(str(self.score), True, color)
 
     def print_score(self):
-        # for index, option in enumerate(self.options):
         text_render = self.render_text(self.score)
-        screen.blit(text_render, (0, 0))
+        screen.blit(text_render, score_pos)
 
     def start(self, level=None):
         if level != None:
             self.level = Level(level, wall_pic, None)
-            print(level)
-            # self.background = self.level.background
         else:
             pass # todo
         
@@ -46,7 +43,9 @@ class Game:
     
         while snake.is_dead == False:
             
-            screen.fill((0, 0, 0))
+
+            background.draw()
+
             all_food.draw(screen)
             snake.draw()
             self.print_score()
@@ -71,7 +70,7 @@ class Game:
 
 
                 
-                screen.fill((0, 0, 0))
+                background.draw()
                 
                 snake.draw()
                 all_food.remove(res)
@@ -89,7 +88,6 @@ class Game:
                     
             snake.move(self.boosts)
             
-        # print(len(snake.body))
         self.quit()
             
     def quit(self):
@@ -114,4 +112,4 @@ class Game:
         with open('scores.txt', 'w') as f:
             for i in scores:
                 f.write(str(i) + '\n')
-    # def body(self):
+

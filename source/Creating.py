@@ -2,8 +2,10 @@ import pygame
 from source.Snake import Skin
 from source.Food_Generator import FoodGenerator
 from source.Food import Boost
-from source.config import screen
+from source.config import screen, basic_background_color
+from source.Background import Background
 
+background = Background(color=basic_background_color)
 
 snake_skin = Skin(pygame.image.load('images/heads/head1/head1_d.png'),
                   pygame.image.load('images/heads/head1/head1_u.png'),
